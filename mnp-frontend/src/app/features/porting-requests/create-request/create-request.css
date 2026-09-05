@@ -1,0 +1,12 @@
+.inline-form {
+  border: 1px dashed #cdd3de;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: #fafbfd;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}

@@ -1,0 +1,100 @@
+<div class="page">
+  <div class="card">
+    <div class="header-row">
+      <h2>Porting Requests</h2>
+      <div class="header-actions">
+        <button class="btn secondary" (click)="load()" [disabled]="loading()">Refresh</button>
+        <button class="btn" (click)="showCreateForm.set(!showCreateForm())">
+          {{ showCreateForm() ? 'Close' : '+ New Request' }}
+        </button>
+      </div>
+    </div>
+
+    @if (showCreateForm()) {
+      <app-create-request (created)="onCreated($event)" (cancel)="showCreateForm.set(false)" />
+    }
+
+    @if (errorMessage()) {
+      <div class="error-banner">{{ errorMessage() }}</div>
+    }
+
+    @if (loading()) {
+      <p class="muted">Loading…</p>
+    } @else if (requests().length === 0) {
+      <p class="muted">No porting requests to show.</p>
+    } @else {
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Phone Number</th>
+            <th>Recipient</th>
+            <th>Donor</th>
+            <th>Status</th>
+            <th>Updated</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (request of requests(); track request.id) {
+            <tr>
+              <td>#{{ request.id }}</td>
+              <td>{{ request.phoneNumber }}</td>
+              <td>{{ request.recipient }}</td>
+              <td>{{ request.donor }}</td>
+              <td>
+                <app-status-badge [status]="request.status" />
+                @if (request.rejectionReason) {
+                  <div class="reason-note">{{ request.rejectionReason }}</div>
+                }
+              </td>
+              <td>{{ request.updatedAt | localDateTime }}</td>
+              <td class="row-actions">
+                @if (request.status === 'PENDING' && isDonor(request) && rejectingId() !== request.id) {
+                  <button
+                    class="btn accept"
+                    [disabled]="processingId() === request.id"
+                    (click)="accept(request)"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    class="btn reject"
+                    [disabled]="processingId() === request.id"
+                    (click)="startReject(request)"
+                  >
+                    Reject
+                  </button>
+                }
+              </td>
+            </tr>
+            @if (rejectingId() === request.id) {
+              <tr class="reject-row">
+                <td colspan="7">
+                  <div class="reject-inline">
+                    <input
+                      type="text"
+                      placeholder="Reason for rejecting this request"
+                      [(ngModel)]="rejectionReason"
+                      [disabled]="processingId() === request.id"
+                    />
+                    <button
+                      class="btn reject"
+                      [disabled]="processingId() === request.id"
+                      (click)="confirmReject(request)"
+                    >
+                      Confirm reject
+                    </button>
+                    <button class="btn secondary" [disabled]="processingId() === request.id" (click)="cancelReject()">
+                      Cancel
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>

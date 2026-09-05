@@ -1,0 +1,22 @@
+<div class="select-screen">
+  <div class="card">
+    <h1>Mobile Number Portability Service</h1>
+    <p class="muted">Choose which operator you're acting as.</p>
+
+    @if (errorMessage()) {
+      <div class="error-banner">{{ errorMessage() }}</div>
+    }
+
+    @if (loading()) {
+      <p class="muted">Loading operators…</p>
+    } @else {
+      <div class="operator-grid">
+        @for (op of operators(); track op.id) {
+          <button type="button" class="operator-tile" (click)="choose(op)">
+            {{ op.name }}
+          </button>
+        }
+      </div>
+    }
+  </div>
+</div>

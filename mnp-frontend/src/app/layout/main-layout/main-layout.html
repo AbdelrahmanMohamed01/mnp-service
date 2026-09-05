@@ -1,0 +1,17 @@
+<header class="app-header">
+  <h1>Mobile Number Portability Service</h1>
+
+  <div class="header-row">
+    <nav class="navbar">
+      <a routerLink="/requests" routerLinkActive="active">Porting Requests</a>
+      <a routerLink="/phone-status" routerLinkActive="active">Phone Number Status</a>
+    </nav>
+
+    <p class="acting-as">
+      Acting as <strong>{{ operatorContext.activeOperatorName() }}</strong>
+      · <button type="button" class="link-btn" (click)="switchOperator()">switch operator</button>
+    </p>
+  </div>
+</header>
+
+<router-outlet />

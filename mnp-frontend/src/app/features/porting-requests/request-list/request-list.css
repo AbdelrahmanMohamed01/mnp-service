@@ -1,0 +1,56 @@
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.row-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.row-actions .btn {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.reason-note {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #b32424;
+  max-width: 220px;
+}
+
+.reject-row td {
+  background: #fafbfd;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.reject-inline {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.reject-inline input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #cdd3de;
+  border-radius: 6px;
+}
+
+.reject-inline .btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}

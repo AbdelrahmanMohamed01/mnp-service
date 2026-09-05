@@ -1,0 +1,31 @@
+<div class="inline-form">
+  <p class="muted">
+    Submitting as recipient <strong>{{ operatorContext.activeOperatorName() }}</strong>. The donor
+    operator is worked out automatically from the phone number.
+  </p>
+
+  @if (errorMessage()) {
+    <div class="error-banner">{{ errorMessage() }}</div>
+  }
+
+  <form (ngSubmit)="submit()">
+    <div class="field">
+      <label for="phoneNumber">Phone number</label>
+      <input
+        id="phoneNumber"
+        name="phoneNumber"
+        type="text"
+        placeholder="e.g. 01129627429"
+        [(ngModel)]="phoneNumber"
+        [disabled]="submitting()"
+      />
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn" [disabled]="submitting()">
+        {{ submitting() ? 'Submitting…' : 'Submit request' }}
+      </button>
+      <button type="button" class="btn secondary" (click)="cancel.emit()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,21 @@
+h2 {
+  margin-top: 0;
+}
+
+.result {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  row-gap: 8px;
+}
+
+.result dt {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.result dd {
+  margin: 0;
+  font-weight: 600;
+  font-size: 13px;
+}

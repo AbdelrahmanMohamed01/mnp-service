@@ -1,0 +1,35 @@
+<div class="page">
+  <div class="card">
+    <h2>Phone Number Status</h2>
+    <p class="muted">Look up the current porting status and holder for a phone number.</p>
+
+    @if (errorMessage()) {
+      <div class="error-banner">{{ errorMessage() }}</div>
+    }
+
+    <form (ngSubmit)="lookup()">
+      <div class="field">
+        <label for="phoneNumber">Phone number</label>
+        <input id="phoneNumber" name="phoneNumber" type="text" placeholder="e.g. 01129627429" [(ngModel)]="phoneNumber" />
+      </div>
+      <button type="submit" class="btn" [disabled]="loading()">
+        {{ loading() ? 'Looking up…' : 'Look up' }}
+      </button>
+    </form>
+
+    @if (result(); as status) {
+      <dl class="result">
+        <dt>Phone number</dt>
+        <dd>{{ status.phoneNumber }}</dd>
+        <dt>Current holder</dt>
+        <dd>{{ status.currentHolder }}</dd>
+        @if (status.isPorted || status.portingStatus) {
+          <dt>Porting status</dt>
+          <dd>{{ status.portingStatus }}</dd>
+        }
+        <dt>Ported</dt>
+        <dd>{{ status.isPorted ? 'Yes' : 'No' }}</dd>
+      </dl>
+    }
+  </div>
+</div>

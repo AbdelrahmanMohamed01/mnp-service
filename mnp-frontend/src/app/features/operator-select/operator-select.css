@@ -1,0 +1,40 @@
+.select-screen {
+  min-height: calc(100vh - 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-screen .card {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+
+.operator-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.operator-tile {
+  padding: 22px 12px;
+  border-radius: 8px;
+  border: 1px solid #cdd3de;
+  background: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  color: #1f2430;
+}
+
+.operator-tile:hover {
+  border-color: #2f5dd6;
+  color: #2f5dd6;
+  background: #f2f5fd;
+}

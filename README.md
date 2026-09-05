@@ -8,7 +8,7 @@ The project has two parts:
 - **`mnp-backend`** — Spring Boot REST API (business rules, validation, persistence).
 - **`mnp-frontend`** — Angular SPA that consumes the API.
 
-Both run together via Docker Compose, alongside MySQL.
+Both run together via Docker Compose, alongside MySQL. The database initialization script (`schema.sql`) is located at `mnp-backend\src\main\resources\schema.sql`.
 
 ---
 
@@ -93,12 +93,11 @@ From the repository root (where `docker-compose.yml` lives):
 ```bash
 docker compose up --build
 ```
-> **Note for whoever runs this:** on the very first build, Docker Desktop sometimes drops the
-> connection partway through with an error like `error during connect: ... EOF` while creating a
-> container. This is a one-time Docker Desktop/engine hiccup caused by building the frontend,
-> backend, and pulling MySQL all at once right after the engine starts — it is **not** a problem
-> with the project itself. If you hit it, avoid the heavy combined build by splitting it into two
-> steps instead:
+> **Note for whoever runs this:** On the very first build, Docker Desktop will prompt for permission to access your local project directory.
+> Please accept this File Sharing prompt immediately (click "Yes").
+> If this prompt is left open or delayed, it interrupts the build process
+>  and causes Docker's background connection to drop with an error during connect: ... EOF while creating a container.
+> If you hit this timeout, simply avoid the heavy combined build by splitting it into two steps to recover cleanly:
 > ```bash
 > docker compose build
 > docker compose up
